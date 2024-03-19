@@ -1,0 +1,7 @@
+exports.BASEURL='http://localhost:5555'
+exports.GITREPOS=[
+    // plz update the following to your own repo
+    {name: 'REPO1',url: 'https://url_to_repo/backend.git', br: 'prd', dir: 'C:\\path_to_Dest\\server'},
+    {name: 'REPO2',url: 'https://url_to_repo/frontend.git', br: 'prd', dir: 'C:\\path_to_Dest\\client'}
+]
+exports.PORT=5050

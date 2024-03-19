@@ -1,0 +1,6 @@
+﻿exports.PORT = 5555;
+exports.SYNCLINK = [
+    // plz update the following to your own path
+    { sourceDir: 'C:\\Users\\usr\\Desktop\\server', destDir: 'C:\\dest\\Project\\server'},
+    { sourceDir: 'C:\\Users\\usr\\Desktop\\client', destDir: 'C:\\dest\\Project\\client'},
+]
