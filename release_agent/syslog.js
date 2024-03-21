@@ -40,17 +40,41 @@ exports.useState = (initState) => {
 exports.sysLogs = (info) => {
     const time = logTime();
     const type = info?.type?.toLowerCase();
+    if (!info.func && !info.location) {
+        (async () => {
+            const chalk = await import('chalk');
+            console.log(`${chalk.default.bgYellow.bold(' WARN ')} - missing params of 'func' and 'location'\nfunc: exec function name\nlocation: function location`)
+        })();
+        return;
+    }
+    if (!info.func) {
+        (async () => {
+            const chalk = await import('chalk');
+            console.log(`${chalk.default.bgYellow.bold(' WARN ')} - missing params of 'func'\nfunc: exec function name`)
+        })();
+        return;
+    }
+    if (!info.location) {
+        (async () => {
+            const chalk = await import('chalk');
+            console.log(`${chalk.default.bgYellow.bold(' WARN ')} - missing param of 'location'\nlocation: function location`)
+        })();
+        return;
+    }
     // console.log(`type: `,type);
     (async () => {
         const chalk = await import('chalk');
         switch (type) {
             case 'error':
             case 'err':
-                console.log(`${time} ${chalk.default.bgRed.bold(' ERROR ')} - ${info.func} @${info.location}\n${info.msg}`);
+                console.log(`${time} ${chalk.default.bgRed.bold(' ERROR ')} - ${info.func} @${info.location}\n${info.msg||''}`);
                 break;
             case 'warn':
             case 'warning':
-                console.log(`${time} ${chalk.default.bgYellow.bold(' WARN ')} - ${info.func} @${info.location}`);
+                console.log(`${time} ${chalk.default.bgYellow.bold(' WARN ')} - ${info.func} @${info.location}\n${info.msg||''}`);
+                break;
+            case 'process':
+                console.log(`${time} ${chalk.default.bgBlue.bold(' PROCESS ')} - ${info.func} @${info.location}\n${info.msg||''}`);
                 break;
             default:
                 console.log(`${time} ${chalk.default.bgGreen.bold(' INFO ')} - ${info.func} @${info.location}`);
