@@ -30,7 +30,7 @@ const gitFetchCheck = async (gitRepos) => {
     const fetchPromises = gitRepos.map(repo => {
         return new Promise(async (resolve, reject) => {
             try {
-                console.log(`REPO: ${repo.name}`);
+                // console.log(`REPO: ${repo.name}`);
                 const git = $git(repo.dir);
 
                 await git.fetch();
@@ -60,7 +60,7 @@ const gitFetchCheck = async (gitRepos) => {
                 } else {
                     // console.log(`[${repo.name}] - No update.`);
                     logParams.type = 'process';
-                    logParams.msg = `[${repo.name}] - No update.`
+                    logParams.msg = `[${repo.name}] - Nothing New.`
                     $fn.sysLogs(logParams);
                     resolve('OK'); // Add an empty argument to resolve()
                 }
@@ -127,11 +127,11 @@ const gitFetch = cron.from({
 /** /repo/update */
 app.post('/repo/release', async (req, res) => {
     res.send('OK');
-    console.log(`[START] - git release ...`);
+    console.log(`[START] - CI/CD ...`);
     await gitFetchCheck(gitRepos);
     // console.log(`[START] - svn release ...`)
     // await svnFetchCheck(svnRepos);
-    console.log(`[START] - git update ...`);
+    console.log(`[START] - releasing to Server ...`);
     $axios.post('/repo/update');
 });
 async function releaseBot (param) {
