@@ -162,6 +162,14 @@ async function releaseBot (param) {
         })
     }
 }
+/**
+ {
+    "type": "book",
+    "date": "2024-03-21",
+    "time": "09:52:00",
+    "params": ["pmvue"]
+}
+ */
 app.post('/repo/booking/release', async (req, res) => {
     // console.log(`req: `,req.body);
     // $handler.TimeDiff('', req.body.date, req.body.time);
